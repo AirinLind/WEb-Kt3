@@ -4,33 +4,102 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Custom Card Component</title>
+    <style>
+      .card-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        padding: 40px;
+        min-height: 100vh;
+        background-color: #f4f4f9;
+      }
+    </style>
   </head>
-
   <body>
+    <div class="card-container">
+      <custom-card>
+        <span slot="header">Заголовок 1</span>
+        <span slot="content"
+          >Контент для первой карточки. Он может быть любым.</span
+        >
+        <span slot="footer">Футер 1</span>
+      </custom-card>
+
+      <custom-card>
+        <span slot="header">Заголовок 2</span>
+        <span slot="content"
+          >Контент для второй карточки. Он может быть другим.</span
+        >
+        <span slot="footer">Футер 2</span>
+      </custom-card>
+
+      <custom-card>
+        <span slot="header">Заголовок 3</span>
+        <span slot="content"
+          >Контент для третьей карточки. Различный текст для демонстрации.</span
+        >
+        <span slot="footer">Футер 3</span>
+      </custom-card>
+    </div>
+
     <template id="card-template">
       <style>
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
+
         .card {
-          border: 1px solid #ddd;
-          border-radius: 8px;
-          padding: 16px;
-          max-width: 300px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-          transition: box-shadow 0.3s ease;
+          background-color: #fff;
+          border-radius: 12px;
+          padding: 24px;
+          max-width: 320px;
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+          overflow: hidden;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .card:hover {
-          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+          transform: translateY(-8px);
+          box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
         }
 
         .card-header {
-          font-size: 1.25rem;
+          font-size: 1.5rem;
           font-weight: bold;
-          margin-bottom: 8px;
+          color: #333;
+          margin-bottom: 12px;
         }
 
         .card-content {
           font-size: 1rem;
-          color: #333;
+          line-height: 1.6;
+          color: #555;
+          margin-bottom: 16px;
+        }
+
+        .card-footer {
+          text-align: right;
+          font-size: 0.9rem;
+          color: #888;
+        }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .card {
+          animation: fadeInUp 0.5s ease;
         }
       </style>
       <div class="card">
@@ -61,11 +130,5 @@
 
       customElements.define("custom-card", CustomCard);
     </script>
-
-    <custom-card>
-      <span slot="header">Заголовок карточки</span>
-      <span slot="content">Основной контент карточки</span>
-      <span slot="footer">Футер карточки</span>
-    </custom-card>
   </body>
 </html>
